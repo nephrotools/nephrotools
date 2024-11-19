@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { Helmet } from "react-helmet-async";
+import { Config } from "../AppConfig";
 
 interface Fluid {
     id: number;
@@ -14,11 +16,9 @@ const HyponatremiaCalculator: React.FC = () => {
     const [dialysateRate, setDialysateRate] = useState<number>(2);
     const [fluids, setFluids] = useState<Fluid[]>([]);
     const [nextFluidId, setNextFluidId] = useState<number>(1);
-
     const [dilutingSolutionRate, setDilutingSolutionRate] = useState<string>("0");
     const [totalRate, setTotalRate] = useState<string>("0");
 
-    // Add Fluid
     const addFluid = () => {
         setFluids([
             ...fluids,
@@ -27,12 +27,10 @@ const HyponatremiaCalculator: React.FC = () => {
         setNextFluidId(nextFluidId + 1);
     };
 
-    // Remove Fluid
     const removeFluid = (id: number) => {
         setFluids(fluids.filter((fluid) => fluid.id !== id));
     };
 
-    // Handle Fluid Na and Rate Change
     const handleFluidChange = (id: number, field: "fluidNa" | "fluidRate", value: number) => {
         setFluids(
             fluids.map((fluid) =>
@@ -41,7 +39,6 @@ const HyponatremiaCalculator: React.FC = () => {
         );
     };
 
-    // Calculate Results
     const calculateResults = () => {
         const dilutingNa =
             dilutingSolutionNa === "custom" ? customDilutingSolutionNa : parseInt(dilutingSolutionNa);
@@ -70,35 +67,49 @@ const HyponatremiaCalculator: React.FC = () => {
         setTotalRate(newTotalRate);
     };
 
-    // Trigger calculation on every state change
     useEffect(() => {
         calculateResults();
     }, [targetNa, dilutingSolutionNa, customDilutingSolutionNa, dialysateNa, dialysateRate, fluids]);
 
-    // Focus handler to select content
     const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
         e.target.select();
     };
 
     return (
         <div className="container mt-2">
+            <Helmet>
+                <title>CRRT Hyponatremia - {Config.Title}</title>
+            </Helmet>
             <h3 className="my-3">CRRT Hyponatremia Calculator</h3>
             <div className="row">
-                <div className="col-md-4 results-section sticky-results">
-                    <p><strong>Diluting Solution Rate:</strong> {dilutingSolutionRate} L/hr</p>
-                    <p><strong>Total Rate:</strong> {totalRate} L/hr</p>
+                <div className="col-md-4 py-2 results-section sticky-results">
+                    <p className="my-1"><strong>Diluting Solution Rate:</strong> {dilutingSolutionRate} L/hr</p>
+                    <p className="my-1"><strong>Total Rate:</strong> {totalRate} L/hr</p>
                 </div>
                 <div className="col-md-8">
                     <div className="mb-3">
                         <label htmlFor="targetNa" className="form-label">Target Na (meq/L)</label>
-                        <input
-                            type="number"
-                            id="targetNa"
-                            className="form-control mt-2"
-                            value={targetNa}
-                            onChange={(e) => setTargetNa(parseInt(e.target.value))}
-                            onFocus={handleFocus}
-                        />
+                        <div className="d-flex align-items-center">
+                            <input
+                                type="range"
+                                id="targetNaSlider"
+                                className="form-range me-3 px-3"
+                                min="120"
+                                max="150"
+                                step="1"
+                                value={targetNa}
+                                onChange={(e) => setTargetNa(parseInt(e.target.value))}
+                            />
+                            <input
+                                type="number"
+                                id="targetNa"
+                                className="form-control"
+                                value={targetNa}
+                                onChange={(e) => setTargetNa(parseInt(e.target.value))}
+                                onFocus={handleFocus}
+                                style={{ width: "100px" }}
+                            />
+                        </div>
                     </div>
 
                     <div className="mb-3">
@@ -139,14 +150,27 @@ const HyponatremiaCalculator: React.FC = () => {
 
                     <div className="mb-3">
                         <label htmlFor="dialysateRate" className="form-label">Dialysate Rate (L/hr)</label>
-                        <input
-                            type="number"
-                            id="dialysateRate"
-                            className="form-control mt-2"
-                            value={dialysateRate}
-                            onChange={(e) => setDialysateRate(parseFloat(e.target.value))}
-                            onFocus={handleFocus}
-                        />
+                        <div className="d-flex align-items-center">
+                            <input
+                                type="range"
+                                id="dialysateRateSlider"
+                                className="form-range me-3 px-3"
+                                min="0"
+                                max="8"
+                                step="0.1"
+                                value={dialysateRate}
+                                onChange={(e) => setDialysateRate(parseFloat(e.target.value))}
+                            />
+                            <input
+                                type="number"
+                                id="dialysateRate"
+                                className="form-control text-center"
+                                value={dialysateRate}
+                                onChange={(e) => setDialysateRate(parseFloat(e.target.value))}
+                                onFocus={handleFocus}
+                                style={{ width: "100px" }}
+                            />
+                        </div>
                     </div>
 
                     <div className="mb-3">
@@ -171,19 +195,37 @@ const HyponatremiaCalculator: React.FC = () => {
                                         type="number"
                                         className="form-control"
                                         value={fluid.fluidNa}
-                                        onChange={(e) => handleFluidChange(fluid.id, "fluidNa", parseInt(e.target.value))}
+                                        onChange={(e) =>
+                                            handleFluidChange(fluid.id, "fluidNa", parseInt(e.target.value))
+                                        }
                                         onFocus={handleFocus}
                                     />
                                 </div>
                                 <div className="mb-3">
                                     <label>Fluid Rate (L/hr)</label>
-                                    <input
-                                        type="number"
-                                        className="form-control"
-                                        value={fluid.fluidRate}
-                                        onChange={(e) => handleFluidChange(fluid.id, "fluidRate", parseFloat(e.target.value))}
-                                        onFocus={handleFocus}
-                                    />
+                                    <div className="d-flex align-items-center">
+                                        <input
+                                            type="range"
+                                            className="form-range me-3 px-3"
+                                            min="0"
+                                            max="8"
+                                            step="0.1"
+                                            value={fluid.fluidRate}
+                                            onChange={(e) =>
+                                                handleFluidChange(fluid.id, "fluidRate", parseFloat(e.target.value))
+                                            }
+                                        />
+                                        <input
+                                            type="number"
+                                            className="form-control"
+                                            value={fluid.fluidRate}
+                                            onChange={(e) =>
+                                                handleFluidChange(fluid.id, "fluidRate", parseFloat(e.target.value))
+                                            }
+                                            onFocus={handleFocus}
+                                            style={{ width: "100px" }}
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </div>

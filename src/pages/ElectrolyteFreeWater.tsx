@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { Helmet } from "react-helmet-async";
+import { Config } from "../AppConfig";
 
 const ElectrolyteFreeWater: React.FC = () => {
     const [calculationMode, setCalculationMode] = useState<string>("Nguyen–Kurtz");
@@ -46,6 +48,9 @@ const ElectrolyteFreeWater: React.FC = () => {
 
     return (
         <div className="container mt-2">
+            <Helmet>
+                <title>Electrolyte Free Water Clearance - {Config.Title}</title>
+            </Helmet>
             <h3 className="text-center">Electrolyte Free Water Clearance Calculator</h3>
             <div className="d-flex justify-content-center my-3">
                 <div className="btn-group" role="group">

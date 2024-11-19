@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import "./CRRTFluidPlanning.css";
+import { Helmet } from "react-helmet-async";
+import { Config } from "../AppConfig";
 
 type FluidPreset = {
     K: number;
@@ -107,6 +109,10 @@ const CRRTFluidPlanning: React.FC = () => {
 
     return (
         <div className="container my-2">
+            <Helmet>
+                <title>CRRT Fluid Planning - {Config.Title}</title>
+            </Helmet>
+
             <h3 className="my-3">CRRT Fluid Planning</h3>
             <div className="row">
                 <div className="col-md-4 py-0 mb-1 sticky-results">
@@ -169,23 +175,26 @@ const CRRTFluidPlanning: React.FC = () => {
                                 ))}
                                 <div className="mb-3">
                                     <label className="form-label">Fluid Rate (L/hr)</label>
-                                    <input
-                                        type="range"
-                                        className="form-range px-3"
-                                        min="0"
-                                        max="6"
-                                        step="0.1"
-                                        value={fluid.rate}
-                                        onChange={(e) => updateFluidRate(fluid.id, parseFloat(e.target.value))}
-                                    />
-                                    <input
-                                        type="number"
-                                        className="form-control"
-                                        step="0.1"
-                                        value={fluid.rate}
-                                        onFocus={(e) => e.target.select()}
-                                        onChange={(e) => updateFluidRate(fluid.id, parseFloat(e.target.value))}
-                                    />
+                                    <div className="d-flex align-items-center">
+                                        <input
+                                            type="range"
+                                            className="form-range me-3 px-3"
+                                            min="0"
+                                            max="6"
+                                            step="0.1"
+                                            value={fluid.rate}
+                                            onChange={(e) => updateFluidRate(fluid.id, parseFloat(e.target.value))}
+                                        />
+                                        <input
+                                            type="number"
+                                            className="form-control"
+                                            step="0.1"
+                                            value={fluid.rate}
+                                            onFocus={(e) => e.target.select()}
+                                            onChange={(e) => updateFluidRate(fluid.id, parseFloat(e.target.value))}
+                                            style={{ width: "100px" }}
+                                        />
+                                    </div>
                                 </div>
                             </div>
                         </div>

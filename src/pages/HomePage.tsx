@@ -1,9 +1,14 @@
 import React from 'react';
+import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
+import { Config } from '../AppConfig';
 
 const HomePage: React.FC = () => {
     return (
         <div className="container my-2">
+            <Helmet>
+                <title>{Config.Title}</title>
+            </Helmet>
 
             <div className="list-group mt-4">
                 <p className="list-group-item active mb-0">CRRT</p>
