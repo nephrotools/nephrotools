@@ -82,7 +82,7 @@ const HyponatremiaCalculator: React.FC = () => {
             </Helmet>
             <h3 className="my-3">CRRT Hyponatremia Calculator</h3>
             <div className="row">
-                <div className="col-md-4 py-2 results-section sticky-results">
+                <div className="col-md-4 mb-2 py-2 sticky-results border-bottom border-secondary shadow-sm">
                     <p className="my-1"><strong>Diluting Solution Rate:</strong> {dilutingSolutionRate} L/hr</p>
                     <p className="my-1"><strong>Total Rate:</strong> {totalRate} L/hr</p>
                 </div>

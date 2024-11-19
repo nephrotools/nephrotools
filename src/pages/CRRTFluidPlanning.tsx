@@ -115,7 +115,7 @@ const CRRTFluidPlanning: React.FC = () => {
 
             <h3 className="my-3">CRRT Fluid Planning</h3>
             <div className="row">
-                <div className="col-md-4 py-0 mb-1 sticky-results">
+                <div className="col-md-4 py-1 mb-1 sticky-results border-bottom border-secondary shadow-sm">
                     <div>
                         <p className="my-0"><strong>Total Rate:</strong> {totalRate} L/hr</p>
                         <p className="my-0"><strong>Final Concentrations:</strong></p>
