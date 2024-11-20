@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
 import "./CRRTFluidPlanning.css";
 import { Helmet } from "react-helmet-async";
 import { Config } from "../AppConfig";
@@ -31,7 +31,7 @@ const CRRTFluidPlanning: React.FC = () => {
 
     const [nextId, setNextId] = useState<number>(2);
 
-    const addFluidCard = () => {
+    const addFluidCard = useCallback(() => {
         setFluids((prevFluids) => [
             ...prevFluids,
             {
@@ -41,20 +41,20 @@ const CRRTFluidPlanning: React.FC = () => {
                 activePreset: null,
             },
         ]);
-        setNextId(nextId + 1);
-    };
+        setNextId((prevNextId) => prevNextId + 1);
+    }, [nextId]);
 
-    const removeFluidCard = (id: number) => {
+    const removeFluidCard = useCallback((id: number) => {
         setFluids((prevFluids) => prevFluids.filter((fluid) => fluid.id !== id));
-    };
+    }, []);
 
-    const updateFluidRate = (id: number, rate: number) => {
+    const updateFluidRate = useCallback((id: number, rate: number) => {
         setFluids((prevFluids) =>
             prevFluids.map((fluid) => (fluid.id === id ? { ...fluid, rate } : fluid))
         );
-    };
+    }, []);
 
-    const updateElectrolyte = (id: number, electrolyte: keyof FluidPreset, value: number) => {
+    const updateElectrolyte = useCallback((id: number, electrolyte: keyof FluidPreset, value: number) => {
         setFluids((prevFluids) =>
             prevFluids.map((fluid) =>
                 fluid.id === id
@@ -66,9 +66,9 @@ const CRRTFluidPlanning: React.FC = () => {
                     : fluid
             )
         );
-    };
+    }, []);
 
-    const applyPreset = (id: number, preset: string) => {
+    const applyPreset = useCallback((id: number, preset: string) => {
         const fluidValues = predefinedFluids[preset as keyof typeof predefinedFluids];
         setFluids((prevFluids) =>
             prevFluids.map((fluid) =>
@@ -81,9 +81,9 @@ const CRRTFluidPlanning: React.FC = () => {
                     : fluid
             )
         );
-    };
+    }, []);
 
-    const calculateResults = () => {
+    const calculateResults = useCallback(() => {
         let totalRate = 0;
         const weightedSums: FluidPreset = { K: 0, Ca: 0, HCO3: 0, Na: 0, Mg: 0 };
 
@@ -103,7 +103,7 @@ const CRRTFluidPlanning: React.FC = () => {
                 return acc;
             }, {} as Record<keyof FluidPreset, string>),
         };
-    };
+    }, [fluids]);
 
     const { totalRate, finalConcentrations } = calculateResults();
 

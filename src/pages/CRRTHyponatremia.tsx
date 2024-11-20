@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useCallback } from "react";
 import { Helmet } from "react-helmet-async";
 import { Config } from "../AppConfig";
 
@@ -19,27 +19,27 @@ const HyponatremiaCalculator: React.FC = () => {
     const [dilutingSolutionRate, setDilutingSolutionRate] = useState<string>("0");
     const [totalRate, setTotalRate] = useState<string>("0");
 
-    const addFluid = () => {
-        setFluids([
-            ...fluids,
+    const addFluid = useCallback(() => {
+        setFluids((prevFluids) => [
+            ...prevFluids,
             { fluidNa: 140, fluidRate: 0, id: nextFluidId },
         ]);
-        setNextFluidId(nextFluidId + 1);
-    };
+        setNextFluidId((prevId) => prevId + 1);
+    }, [nextFluidId]);
 
-    const removeFluid = (id: number) => {
-        setFluids(fluids.filter((fluid) => fluid.id !== id));
-    };
+    const removeFluid = useCallback((id: number) => {
+        setFluids((prevFluids) => prevFluids.filter((fluid) => fluid.id !== id));
+    }, []);
 
-    const handleFluidChange = (id: number, field: "fluidNa" | "fluidRate", value: number) => {
-        setFluids(
-            fluids.map((fluid) =>
+    const handleFluidChange = useCallback((id: number, field: "fluidNa" | "fluidRate", value: number) => {
+        setFluids((prevFluids) =>
+            prevFluids.map((fluid) =>
                 fluid.id === id ? { ...fluid, [field]: value } : fluid
             )
         );
-    };
+    }, []);
 
-    const calculateResults = () => {
+    const calculateResults = useCallback(() => {
         const dilutingNa =
             dilutingSolutionNa === "custom" ? customDilutingSolutionNa : parseInt(dilutingSolutionNa);
 
@@ -65,15 +65,15 @@ const HyponatremiaCalculator: React.FC = () => {
 
         setDilutingSolutionRate(newDilutingSolutionRate);
         setTotalRate(newTotalRate);
-    };
+    }, [targetNa, dilutingSolutionNa, customDilutingSolutionNa, dialysateNa, dialysateRate, fluids]);
 
     useEffect(() => {
         calculateResults();
-    }, [targetNa, dilutingSolutionNa, customDilutingSolutionNa, dialysateNa, dialysateRate, fluids]);
+    }, [calculateResults]);
 
-    const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
+    const handleFocus = useCallback((e: React.FocusEvent<HTMLInputElement>) => {
         e.target.select();
-    };
+    }, []);
 
     return (
         <div className="container mt-2">
