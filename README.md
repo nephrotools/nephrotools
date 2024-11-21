@@ -1,50 +1,7 @@
-# React + TypeScript + Vite
+# README: Nephrotools
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This open-source tool is designed to support educational purposes within the medical community, with a specific focus on nephrology. **It is not intended for use in direct patient care**. The creators and contributors do not assume any responsibility or liability for clinical outcomes or decisions made based on the use of this tool.
 
-Currently, two official plugins are available:
+When applicable, calculators are accompanied by references and detailed equations to ensure transparency and utility. If you identify any errors or discrepancies, we encourage you to contact the creator or submit a pull request via GitHub for review and potential correction.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
-
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
-
-- Configure the top-level `parserOptions` property like this:
-
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
-
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
-
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
-
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+**Disclaimer**: This tool is provided "as is" without any guarantees or warranties, express or implied, including but not limited to the accuracy, reliability, or fitness for a particular purpose. Users should independently verify results and apply clinical judgment and expertise.
