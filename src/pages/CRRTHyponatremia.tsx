@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { Helmet } from "react-helmet-async";
 import { Config } from "../AppConfig";
+import { BlockMath } from "react-katex";
+import 'katex/dist/katex.min.css';
 
 interface Fluid {
     id: number;
@@ -230,6 +232,65 @@ const HyponatremiaCalculator: React.FC = () => {
                             </div>
                         </div>
                     ))}
+                </div>
+            </div>
+
+
+            {/* Reference Button */}
+            <div className="text-center mt-5">
+                <button
+                    className="btn btn-success"
+                    data-bs-toggle="modal"
+                    data-bs-target="#referencesModal"
+                >
+                    References
+                </button>
+            </div>
+
+            {/* Modal */}
+            <div
+                className="modal fade"
+                id="referencesModal"
+                tabIndex={-1}
+                aria-labelledby="referencesModalLabel"
+                aria-hidden="true"
+            >
+                <div className="modal-dialog">
+                    <div className="modal-content">
+                        <div className="modal-header">
+                            <h5 className="modal-title" id="referencesModalLabel">
+                                References
+                            </h5>
+                            <button
+                                type="button"
+                                className="btn-close"
+                                data-bs-dismiss="modal"
+                                aria-label="Close"
+                            ></button>
+                        </div>
+                        <div className="modal-body">
+
+                            <BlockMath math="
+                                \text{[Na]}_{\text{target}} = 
+                                \frac{
+                                    \sum \left(\text{[Na]} \cdot \text{Rate}\right)_{\text{all fluids}}
+                                }{
+                                    \text{Total Fluid Rate}
+                                }
+                                "
+                            />
+
+                        </div>
+                        <div className="modal-footer">
+                            <button
+                                type="button"
+                                className="btn btn-secondary"
+                                data-bs-dismiss="modal"
+                            >
+                                Close
+                            </button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

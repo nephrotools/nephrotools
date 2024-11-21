@@ -2,6 +2,9 @@ import React, { useState, useEffect } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Helmet } from "react-helmet-async";
 import { Config } from "../AppConfig";
+import { BlockMath } from "react-katex";
+import 'katex/dist/katex.min.css';
+
 
 const ElectrolyteFreeWater: React.FC = () => {
     const [calculationMode, setCalculationMode] = useState<string>("Nguyen–Kurtz");
@@ -154,7 +157,7 @@ const ElectrolyteFreeWater: React.FC = () => {
             {/* Reference Button */}
             <div className="text-center mt-5">
                 <button
-                    className="btn btn-info btn-sm"
+                    className="btn btn-success"
                     data-bs-toggle="modal"
                     data-bs-target="#referencesModal"
                 >
@@ -186,19 +189,18 @@ const ElectrolyteFreeWater: React.FC = () => {
                         <div className="modal-body">
                             <ol>
                                 <li>
-                                    Nguyen–Kurtz Electrolyte Free Water:
                                     <a
                                         href="https://pubmed.ncbi.nlm.nih.gov/15383402/"
                                         target="_blank"
                                         rel="noopener noreferrer"
                                     >
-                                        Link to Paper
+                                        Nguyen–Kurtz Modified Electrolyte Free Water:
                                     </a>
+                                    <BlockMath math="\text{EFWC} = V \left(1 - \frac{\text{Urine}[\text{Na} + \text{K}]}{\text{Plasma}[\text{Na}]}\right)" />
                                 </li>
                                 <li>
                                     Traditional Electrolyte Free Water Calculation:
-                                    <br />
-                                    EFWC = V (1 - Urine[Na + K]/Plasma[Na])
+                                    <BlockMath math="\text{EFWC} = V \left(1 - \frac{\text{Urine}[\text{Na} + \text{K}]}{\text{Plasma}[\text{Na}]}\right)" />
                                 </li>
                             </ol>
                         </div>
