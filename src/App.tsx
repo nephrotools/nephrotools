@@ -6,6 +6,9 @@ import ElectrolyteFreeWater from "./pages/ElectrolyteFreeWater";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import NotFoundPage from "./pages/NotFoundPage"; // Import the NotFoundPage component
+import { useEffect } from "react";
+import ReactGA from 'react-ga4';
+import { Config } from "./AppConfig";
 
 // Define the routes for the app
 const router = createBrowserRouter([
@@ -62,6 +65,12 @@ const router = createBrowserRouter([
 ]);
 
 const App = () => {
+
+    useEffect(() => {
+        // Initialize Google Analytics with Measurement ID
+        ReactGA.initialize(Config.GoogleAnalytics);
+    }, []);
+
     return <RouterProvider router={router} />;
 };
 
