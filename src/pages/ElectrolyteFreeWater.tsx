@@ -196,7 +196,7 @@ const ElectrolyteFreeWater: React.FC = () => {
                                     >
                                         Nguyen–Kurtz Modified Electrolyte Free Water:
                                     </a>
-                                    <BlockMath math="\text{EFWC} = V \left(1 - \frac{\text{Urine}[\text{Na} + \text{K}]}{\text{Plasma}[\text{Na}]}\right)" />
+                                    <BlockMath math="\text{EFWC} = V \left(1 - \frac{1.03 * \text{Urine}[\text{Na} + \text{K}]}{\text{Plasma}[\text{Na}]+23.8}\right)" />
                                 </li>
                                 <li>
                                     Traditional Electrolyte Free Water Calculation:
