@@ -8,6 +8,7 @@ interface Fluid {
     id: number;
     fluidNa: number;
     fluidRate: number;
+    selectedPreset: string | null;
 }
 
 const HyponatremiaCalculator: React.FC = () => {
@@ -16,6 +17,7 @@ const HyponatremiaCalculator: React.FC = () => {
     const [customDilutingSolutionNa, setCustomDilutingSolutionNa] = useState<number>(0);
     const [dialysateNa, setDialysateNa] = useState<number>(140);
     const [dialysateRate, setDialysateRate] = useState<number>(2);
+    const [selectedDialysatePreset, setSelectedDialysatePreset] = useState<string | null>(null);
     const [fluids, setFluids] = useState<Fluid[]>([]);
     const [nextFluidId, setNextFluidId] = useState<number>(1);
     const [dilutingSolutionRate, setDilutingSolutionRate] = useState<string>("0");
@@ -24,7 +26,7 @@ const HyponatremiaCalculator: React.FC = () => {
     const addFluid = useCallback(() => {
         setFluids((prevFluids) => [
             ...prevFluids,
-            { fluidNa: 140, fluidRate: 0, id: nextFluidId },
+            { fluidNa: 140, fluidRate: 0, id: nextFluidId, selectedPreset: "Na 140" },
         ]);
         setNextFluidId((prevId) => prevId + 1);
     }, [nextFluidId]);
@@ -35,10 +37,44 @@ const HyponatremiaCalculator: React.FC = () => {
 
     const handleFluidChange = useCallback((id: number, field: "fluidNa" | "fluidRate", value: number) => {
         setFluids((prevFluids) =>
+            prevFluids.map((fluid) => {
+                let preset = null;
+                if (field === "fluidNa") {
+                    if (value === 140) preset = "Na 140";
+                    else if (value === 1000) preset = "NaHCO3 1 meq/mL";
+                    else if (value === 150) preset = "NaHCO3 150 meq/L";
+                    else if (value === 0) preset = "D5W";
+                }
+                return fluid.id === id
+                    ? { ...fluid, [field]: value, selectedPreset: preset }
+                    : fluid;
+            })
+        );
+    }, []);
+
+    const applyPreset = useCallback((id: number, preset: string, value: number) => {
+        setFluids((prevFluids) =>
             prevFluids.map((fluid) =>
-                fluid.id === id ? { ...fluid, [field]: value } : fluid
+                fluid.id === id
+                    ? { ...fluid, fluidNa: value, selectedPreset: preset }
+                    : fluid
             )
         );
+    }, []);
+
+    const applyDialysatePreset = useCallback((preset: string, value: number) => {
+        setDialysateNa(value);
+        setSelectedDialysatePreset(preset);
+    }, []);
+
+    const handleDialysateInputChange = useCallback((value: number) => {
+        setDialysateNa(value);
+        let preset = null;
+        if (value === 140) preset = "Na 140";
+        else if (value === 1000) preset = "NaHCO3 1 meq/mL";
+        else if (value === 150) preset = "NaHCO3 150 meq/L";
+        else if (value === 0) preset = "D5W";
+        setSelectedDialysatePreset(preset);
     }, []);
 
     const calculateResults = useCallback(() => {
@@ -84,9 +120,10 @@ const HyponatremiaCalculator: React.FC = () => {
             </Helmet>
             <h3 className="my-3">CRRT Hyponatremia Calculator</h3>
             <div className="row">
-                <div className="col-md-4 mb-2 py-2 sticky-results border-bottom border-secondary shadow-sm">
-                    <p className="my-1"><strong>Diluting Solution Rate:</strong> {dilutingSolutionRate} L/hr</p>
-                    <p className="my-1"><strong>Total Rate:</strong> {totalRate} L/hr</p>
+                <div className="col-md-4 mb-2 py-3 sticky-results border-bottom border-secondary shadow-sm">
+                    <p className="my-1">Total Rate: {totalRate} L/hr</p>
+                    <p className="my-1">Diluting Solution Na: {dilutingSolutionNa === "custom" ? `${customDilutingSolutionNa}` : dilutingSolutionNa} meq/L</p>
+                    <p className="my-1"><strong>Diluting Solution Rate: {dilutingSolutionRate} L/hr</strong></p>
                 </div>
                 <div className="col-md-8">
                     <div className="mb-3">
@@ -114,6 +151,8 @@ const HyponatremiaCalculator: React.FC = () => {
                         </div>
                     </div>
 
+                    <hr></hr>
+
                     <div className="mb-3">
                         <label htmlFor="dilutingSolutionNa" className="form-label">Diluting Solution Na (meq/L)</label>
                         <select
@@ -138,14 +177,42 @@ const HyponatremiaCalculator: React.FC = () => {
                         )}
                     </div>
 
+                    <hr></hr>
+
                     <div className="mb-3">
                         <label htmlFor="dialysateNa" className="form-label">Dialysate Na (meq/L)</label>
+                        <div className="d-flex flex-wrap">
+                            <button
+                                className={`btn btn-sm me-2 my-1 ${selectedDialysatePreset === "Na 140" ? "btn-primary" : "btn-secondary"}`}
+                                onClick={() => applyDialysatePreset("Na 140", 140)}
+                            >
+                                Na 140
+                            </button>
+                            <button
+                                className={`btn btn-sm me-2 my-1 ${selectedDialysatePreset === "NaHCO3 1 meq/mL" ? "btn-primary" : "btn-secondary"}`}
+                                onClick={() => applyDialysatePreset("NaHCO3 1 meq/mL", 1000)}
+                            >
+                                NaHCO3 1 meq/mL
+                            </button>
+                            <button
+                                className={`btn btn-sm me-2 my-1 ${selectedDialysatePreset === "NaHCO3 150 meq/L" ? "btn-primary" : "btn-secondary"}`}
+                                onClick={() => applyDialysatePreset("NaHCO3 150 meq/L", 150)}
+                            >
+                                NaHCO3 150 meq/L
+                            </button>
+                            <button
+                                className={`btn btn-sm me-2 my-1 ${selectedDialysatePreset === "D5W" ? "btn-primary" : "btn-secondary"}`}
+                                onClick={() => applyDialysatePreset("D5W", 0)}
+                            >
+                                D5W
+                            </button>
+                        </div>
                         <input
                             type="number"
                             id="dialysateNa"
-                            className="form-control"
+                            className="form-control mt-2"
                             value={dialysateNa}
-                            onChange={(e) => setDialysateNa(parseInt(e.target.value))}
+                            onChange={(e) => handleDialysateInputChange(parseInt(e.target.value))}
                             onFocus={handleFocus}
                         />
                     </div>
@@ -192,13 +259,39 @@ const HyponatremiaCalculator: React.FC = () => {
                             </div>
                             <div className="card-body">
                                 <div className="mb-3">
-                                    <label>Fluid Na (meq/L)</label>
+                                    <label className="mb-1">Fluid Na (meq/L)</label>
+                                    <div className="d-flex flex-wrap">
+                                        <button
+                                            className={`btn btn-sm me-2 ${fluid.selectedPreset === "Na 140" ? "btn-primary" : "btn-secondary"}`}
+                                            onClick={() => applyPreset(fluid.id, "Na 140", 140)}
+                                        >
+                                            Na 140
+                                        </button>
+                                        <button
+                                            className={`btn btn-sm me-2 ${fluid.selectedPreset === "NaHCO3 1 meq/mL" ? "btn-primary" : "btn-secondary"}`}
+                                            onClick={() => applyPreset(fluid.id, "NaHCO3 1 meq/mL", 1000)}
+                                        >
+                                            NaHCO3 1 meq/mL
+                                        </button>
+                                        <button
+                                            className={`btn btn-sm me-2 ${fluid.selectedPreset === "NaHCO3 150 meq/L" ? "btn-primary" : "btn-secondary"}`}
+                                            onClick={() => applyPreset(fluid.id, "NaHCO3 150 meq/L", 150)}
+                                        >
+                                            NaHCO3 150 meq/L
+                                        </button>
+                                        <button
+                                            className={`btn btn-sm me-2 ${fluid.selectedPreset === "D5W" ? "btn-primary" : "btn-secondary"}`}
+                                            onClick={() => applyPreset(fluid.id, "D5W", 0)}
+                                        >
+                                            D5W
+                                        </button>
+                                    </div>
                                     <input
                                         type="number"
-                                        className="form-control"
+                                        className="form-control mt-2"
                                         value={fluid.fluidNa}
                                         onChange={(e) =>
-                                            handleFluidChange(fluid.id, "fluidNa", parseInt(e.target.value))
+                                            handleFluidChange(fluid.id, "fluidNa", parseFloat(e.target.value))
                                         }
                                         onFocus={handleFocus}
                                     />

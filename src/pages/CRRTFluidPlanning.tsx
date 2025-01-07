@@ -4,19 +4,22 @@ import { Helmet } from "react-helmet-async";
 import { Config } from "../AppConfig";
 
 type FluidPreset = {
-    K: number;
-    Ca: number;
-    HCO3: number;
     Na: number;
+    K: number;
+    HCO3: number;
+    Ca: number;
     Mg: number;
 };
 
 const predefinedFluids: Record<string, FluidPreset> = {
-    "BGK 4/2.5": { K: 4, Ca: 2.5, HCO3: 32, Na: 140, Mg: 1.5 },
-    "B22GK 4/0": { K: 4, Ca: 0, HCO3: 22, Na: 140, Mg: 1.5 },
-    "BGK 2/0": { K: 2, Ca: 0, HCO3: 32, Na: 140, Mg: 1.0 },
-    "BGK 2/3.5": { K: 2, Ca: 3.5, HCO3: 32, Na: 140, Mg: 1.0 },
-    "BGK 0/2.5": { K: 0, Ca: 2.5, HCO3: 32, Na: 140, Mg: 1.5 },
+    "BGK 4/2.5": { Na: 140, K: 4, HCO3: 32, Ca: 2.5, Mg: 1.5 },
+    "B22GK 4/0": { Na: 140, K: 4, HCO3: 22, Ca: 0, Mg: 1.5 },
+    "BGK 2/0": { Na: 140, K: 2, HCO3: 32, Ca: 0, Mg: 1.0 },
+    "BGK 2/3.5": { Na: 140, K: 2, HCO3: 32, Ca: 3.5, Mg: 1.0 },
+    "BGK 0/2.5": { Na: 140, K: 0, HCO3: 32, Ca: 2.5, Mg: 1.5 },
+    "NaHCO3 1 meq/mL": { Na: 1000, K: 0, HCO3: 1000, Ca: 0, Mg: 0 },
+    "NaHCO3 150 meq/L": { Na: 150, K: 0, HCO3: 150, Ca: 0, Mg: 0 },
+    "D5W": { Na: 0, K: 0, HCO3: 0, Ca: 0, Mg: 0 },
 };
 
 const CRRTFluidPlanning: React.FC = () => {
@@ -27,7 +30,7 @@ const CRRTFluidPlanning: React.FC = () => {
             electrolytes: FluidPreset;
             activePreset: string | null;
         }[]
-    >([{ id: 1, rate: 0, electrolytes: { K: 0, Ca: 0, HCO3: 0, Na: 0, Mg: 0 }, activePreset: null }]);
+    >([{ id: 1, rate: 0, electrolytes: { Na: 0, K: 0, HCO3: 0, Ca: 0, Mg: 0 }, activePreset: null }]);
 
     const [nextId, setNextId] = useState<number>(2);
 
@@ -37,7 +40,7 @@ const CRRTFluidPlanning: React.FC = () => {
             {
                 id: nextId,
                 rate: 0,
-                electrolytes: { K: 0, Ca: 0, HCO3: 0, Na: 0, Mg: 0 },
+                electrolytes: { Na: 0, K: 0, HCO3: 0, Ca: 0, Mg: 0 },
                 activePreset: null,
             },
         ]);
@@ -85,7 +88,7 @@ const CRRTFluidPlanning: React.FC = () => {
 
     const calculateResults = useCallback(() => {
         let totalRate = 0;
-        const weightedSums: FluidPreset = { K: 0, Ca: 0, HCO3: 0, Na: 0, Mg: 0 };
+        const weightedSums: FluidPreset = { Na: 0, K: 0, HCO3: 0, Ca: 0, Mg: 0 };
 
         fluids.forEach((fluid) => {
             totalRate += fluid.rate;
@@ -119,13 +122,21 @@ const CRRTFluidPlanning: React.FC = () => {
                     <div>
                         <p className="my-0"><strong>Total Rate:</strong> {totalRate} L/hr</p>
                         <p className="my-0"><strong>Final Concentrations:</strong></p>
-                        <ul className="mb-0">
-                            <li><strong>K:</strong> {finalConcentrations.K} mEq/L</li>
-                            <li><strong>Ca:</strong> {finalConcentrations.Ca} mEq/L</li>
-                            <li><strong>HCO3:</strong> {finalConcentrations.HCO3} mEq/L</li>
-                            <li><strong>Na:</strong> {finalConcentrations.Na} mEq/L</li>
-                            <li><strong>Mg:</strong> {finalConcentrations.Mg} mEq/L</li>
-                        </ul>
+                        <div className="row">
+                            <div className="col-6">
+                                <ul className="mb-0">
+                                    <li><strong>Na:</strong> {finalConcentrations.Na} mEq/L</li>
+                                    <li><strong>K:</strong> {finalConcentrations.K} mEq/L</li>
+                                    <li><strong>HCO3:</strong> {finalConcentrations.HCO3} mEq/L</li>
+                                </ul>
+                            </div>
+                            <div className="col-6">
+                                <ul className="mb-0">
+                                    <li><strong>Ca:</strong> {finalConcentrations.Ca} mEq/L</li>
+                                    <li><strong>Mg:</strong> {finalConcentrations.Mg} mEq/L</li>
+                                </ul>
+                            </div>
+                        </div>
                     </div>
                 </div>
 
