@@ -1,5 +1,6 @@
 {
   "name": "nephrotools",
+  "homepage": "https://nephrotools.github.io/",
   "private": true,
   "version": "0.0.0",
   "type": "module",
@@ -9,7 +10,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d build"
+    "deploy": "gh-pages -d dist"
   },
   "dependencies": {
     "@types/bootstrap": "^5.2.10",
@@ -30,7 +31,8 @@
     "eslint": "^9.13.0",
     "eslint-plugin-react-hooks": "^5.0.0",
     "eslint-plugin-react-refresh": "^0.4.14",
-    "github-pages": "^3.0.2",
+    "gh-pages": "^6.3.0",
+    "github-pages": "^0.1.0",
     "globals": "^15.11.0",
     "typescript": "~5.6.2",
     "typescript-eslint": "^8.11.0",
