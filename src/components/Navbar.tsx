@@ -45,6 +45,27 @@ const Navbar: React.FC = () => {
                                 </li>
                             </ul>
                         </li>
+
+                        <li className="nav-item dropdown">
+                            <a
+                                className="nav-link dropdown-toggle"
+                                href="#"
+                                id="sodiumDropdown"
+                                role="button"
+                                data-bs-toggle="dropdown"
+                                aria-expanded="false"
+                            >
+                                HD
+                            </a>
+                            <ul className="dropdown-menu" aria-labelledby="sodiumDropdown">
+                                <li>
+                                    <Link to="/hd-hyponatremia" className="dropdown-item">
+                                        HD Hyponatremia
+                                    </Link>
+                                </li>
+                            </ul>
+                        </li>
+
                         <li className="nav-item dropdown">
                             <a
                                 className="nav-link dropdown-toggle"

@@ -1,0 +1,23 @@
+/* Default sticky behavior */
+.sticky-results {
+    position: -webkit-sticky;
+    /* Safari */
+    position: sticky;
+}
+
+/* Sticky for larger screens (desktop) */
+@media (min-width: 768px) {
+    .sticky-results {
+        top: calc(56px + 20px);
+        align-self: flex-start;
+    }
+}
+
+/* Sticky for smaller screens (mobile) */
+@media (max-width: 767px) {
+    .sticky-results {
+        top: 0;
+        z-index: 1030;
+        background-color: white;
+    }
+}
