@@ -486,7 +486,7 @@ const HemodialysisSodiumChangeCalculator: React.FC = () => {
                             <p className="small">
                                 [Na]<sub>s</sub> = serum sodium (mEq/L)<br />
                                 [Na]<sub>d</sub> = dialysate sodium (mEq/L)<br />
-                                Q<sub>b</sub> = blood flow rate (mL/min)<br />
+                                Q<sub>b</sub> = blood flow rate L/min (mL/min ÷ 1000)<br />
                                 t = dialysis duration (min)<br />
                                 TBW = total body water (L)<br />
                                 UF = ultrafiltration volume (L)<br />
