@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Helmet } from "react-helmet-async";
 import { Config } from "../AppConfig";
 import { BlockMath } from "react-katex";
-import 'katex/dist/katex.min.css';
 
 interface Fluid {
     id: number;

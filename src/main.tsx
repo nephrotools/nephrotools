@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/dist/js/bootstrap.bundle.min.js';
 import App from './App';
 import './main.css'
+import 'katex/dist/katex.min.css';
 import { HelmetProvider } from 'react-helmet-async';
 
 

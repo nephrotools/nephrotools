@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from "react";
-import "bootstrap/dist/css/bootstrap.min.css";
 import { Helmet } from "react-helmet-async";
 import { Config } from "../AppConfig";
 import { BlockMath } from "react-katex";
-import 'katex/dist/katex.min.css';
 
 
 const ElectrolyteFreeWater: React.FC = () => {

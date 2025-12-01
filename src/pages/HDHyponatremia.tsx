@@ -2,7 +2,6 @@ import React, { useState, useEffect, useCallback } from "react";
 import { Helmet } from "react-helmet-async";
 import { Config } from "../AppConfig";
 import { BlockMath } from "react-katex";
-import "katex/dist/katex.min.css";
 
 const HemodialysisSodiumChangeCalculator: React.FC = () => {
     const [bloodFlowRate, setBloodFlowRate] = useState<number>(200);      // mL/min
@@ -491,7 +490,9 @@ const HemodialysisSodiumChangeCalculator: React.FC = () => {
                                 TBW = total body water (L)<br />
                                 UF = ultrafiltration volume (L)<br />
                                 D5W = D5W volume in liters (D5W mL ÷ 1000)<br />
-                                <hr />
+                            </p>
+                            <hr />
+                            <p className="small">
                                 A deliberate decision was made to use the blood flow rate rather than the plasma flow rate to provide an additional margin of safety against overcorrection. It is acknowledged, however, that the plasma flow rate would offer greater physiological accuracy.
                             </p>
                         </div>

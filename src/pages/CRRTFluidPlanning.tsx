@@ -1,5 +1,4 @@
 import React, { useState, useCallback } from "react";
-import "./CRRTFluidPlanning.css";
 import { Helmet } from "react-helmet-async";
 import { Config } from "../AppConfig";
 
