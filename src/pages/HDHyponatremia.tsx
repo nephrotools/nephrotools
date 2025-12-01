@@ -477,7 +477,7 @@ const HemodialysisSodiumChangeCalculator: React.FC = () => {
                                     -
                                     \\text{UF} \\cdot [\\text{Na}]_s
                                 }{
-                                    \\text{TBW} + \\text{D5W}_{\\text{L}} - \\text{UF}
+                                    \\text{TBW} + \\text{D5W} - \\text{UF}
                                 }
                                 `}
                             />
