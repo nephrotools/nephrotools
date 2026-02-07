@@ -261,25 +261,25 @@ const HyponatremiaCalculator: React.FC = () => {
                                     <label className="mb-1">Fluid Na (meq/L)</label>
                                     <div className="d-flex flex-wrap">
                                         <button
-                                            className={`btn btn-sm me-2 ${fluid.selectedPreset === "Na 140" ? "btn-primary" : "btn-secondary"}`}
+                                            className={`btn btn-sm me-2 mb-1 ${fluid.selectedPreset === "Na 140" ? "btn-primary" : "btn-secondary"}`}
                                             onClick={() => applyPreset(fluid.id, "Na 140", 140)}
                                         >
                                             Na 140
                                         </button>
                                         <button
-                                            className={`btn btn-sm me-2 ${fluid.selectedPreset === "NaHCO3 1 meq/mL" ? "btn-primary" : "btn-secondary"}`}
+                                            className={`btn btn-sm me-2 mb-1 ${fluid.selectedPreset === "NaHCO3 1 meq/mL" ? "btn-primary" : "btn-secondary"}`}
                                             onClick={() => applyPreset(fluid.id, "NaHCO3 1 meq/mL", 1000)}
                                         >
                                             NaHCO3 1 meq/mL
                                         </button>
                                         <button
-                                            className={`btn btn-sm me-2 ${fluid.selectedPreset === "NaHCO3 150 meq/L" ? "btn-primary" : "btn-secondary"}`}
+                                            className={`btn btn-sm me-2 mb-1 ${fluid.selectedPreset === "NaHCO3 150 meq/L" ? "btn-primary" : "btn-secondary"}`}
                                             onClick={() => applyPreset(fluid.id, "NaHCO3 150 meq/L", 150)}
                                         >
                                             NaHCO3 150 meq/L
                                         </button>
                                         <button
-                                            className={`btn btn-sm me-2 ${fluid.selectedPreset === "D5W" ? "btn-primary" : "btn-secondary"}`}
+                                            className={`btn btn-sm me-2 mb-1 ${fluid.selectedPreset === "D5W" ? "btn-primary" : "btn-secondary"}`}
                                             onClick={() => applyPreset(fluid.id, "D5W", 0)}
                                         >
                                             D5W
