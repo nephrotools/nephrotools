@@ -22,8 +22,8 @@ const HomePage: React.FC = () => {
 
             <div className="list-group mt-4">
                 <p className="list-group-item active mb-0 bg-danger">HD</p>
-                <Link to="/hd-hyponatremia" className="list-group-item list-group-item-action">
-                    HD Hyponatremia
+                <Link to="/hd-sodiumchange" className="list-group-item list-group-item-action">
+                    HD Expected ΔNa
                 </Link>
             </div>
 
