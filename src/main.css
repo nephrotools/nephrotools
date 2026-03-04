@@ -7,10 +7,9 @@ body {
     position: -webkit-sticky;
     /* Safari */
     position: sticky;
-    z-index: 900;
+    z-index: 1000;
 }
 
-/* Keep expanded nav dropdowns above sticky result panels */
 .navbar .dropdown-menu {
     z-index: 1100;
 }
@@ -26,9 +25,8 @@ body {
 /* Sticky for smaller screens (mobile) */
 @media (max-width: 768px) {
     .sticky-results {
-        top: 0;
-        z-index: 900;
-        background-color: white;
+        top: 60px;
+        z-index: 1000;
     }
 }
 

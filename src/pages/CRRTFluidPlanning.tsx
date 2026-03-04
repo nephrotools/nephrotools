@@ -116,24 +116,47 @@ const CRRTFluidPlanning: React.FC = () => {
             </Helmet>
 
             <h3 className="my-3">CRRT Fluid Planning</h3>
+            <div className="card mb-2 sticky-results border-secondary shadow-sm d-md-none">
+                <div className="card-body py-2">
+                    <p className="my-0"><strong>Total Rate:</strong> {totalRate} L/hr</p>
+                    <p className="my-0"><strong>Final Concentrations:</strong></p>
+                    <div className="row">
+                        <div className="col-6">
+                            <ul className="mb-0">
+                                <li><strong>Na:</strong> {finalConcentrations.Na} mEq/L</li>
+                                <li><strong>K:</strong> {finalConcentrations.K} mEq/L</li>
+                                <li><strong>HCO3:</strong> {finalConcentrations.HCO3} mEq/L</li>
+                            </ul>
+                        </div>
+                        <div className="col-6">
+                            <ul className="mb-0">
+                                <li><strong>Ca:</strong> {finalConcentrations.Ca} mEq/L</li>
+                                <li><strong>Mg:</strong> {finalConcentrations.Mg} mEq/L</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
             <div className="row">
-                <div className="col-md-4 py-1 mb-1 sticky-results border-bottom border-secondary shadow-sm">
-                    <div>
-                        <p className="my-0"><strong>Total Rate:</strong> {totalRate} L/hr</p>
-                        <p className="my-0"><strong>Final Concentrations:</strong></p>
-                        <div className="row">
-                            <div className="col-6">
-                                <ul className="mb-0">
-                                    <li><strong>Na:</strong> {finalConcentrations.Na} mEq/L</li>
-                                    <li><strong>K:</strong> {finalConcentrations.K} mEq/L</li>
-                                    <li><strong>HCO3:</strong> {finalConcentrations.HCO3} mEq/L</li>
-                                </ul>
-                            </div>
-                            <div className="col-6">
-                                <ul className="mb-0">
-                                    <li><strong>Ca:</strong> {finalConcentrations.Ca} mEq/L</li>
-                                    <li><strong>Mg:</strong> {finalConcentrations.Mg} mEq/L</li>
-                                </ul>
+                <div className="col-md-4 mb-2 d-none d-md-block">
+                    <div className="card sticky-results border-secondary shadow-sm">
+                        <div className="card-body py-2">
+                            <p className="my-0"><strong>Total Rate:</strong> {totalRate} L/hr</p>
+                            <p className="my-0"><strong>Final Concentrations:</strong></p>
+                            <div className="row">
+                                <div className="col-6">
+                                    <ul className="mb-0">
+                                        <li><strong>Na:</strong> {finalConcentrations.Na} mEq/L</li>
+                                        <li><strong>K:</strong> {finalConcentrations.K} mEq/L</li>
+                                        <li><strong>HCO3:</strong> {finalConcentrations.HCO3} mEq/L</li>
+                                    </ul>
+                                </div>
+                                <div className="col-6">
+                                    <ul className="mb-0">
+                                        <li><strong>Ca:</strong> {finalConcentrations.Ca} mEq/L</li>
+                                        <li><strong>Mg:</strong> {finalConcentrations.Mg} mEq/L</li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                     </div>

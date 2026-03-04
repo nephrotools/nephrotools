@@ -1,9 +1,26 @@
-import React, { useCallback, useRef } from "react";
+import React, { useCallback, useEffect, useRef, useState } from "react";
 import { Link } from "react-router-dom";
 import Collapse from "bootstrap/js/dist/collapse";
 
 const Navbar: React.FC = () => {
     const collapseRef = useRef<HTMLDivElement>(null);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+    useEffect(() => {
+        const el = collapseRef.current;
+        if (!el) return;
+
+        const handleShown = () => setIsMenuOpen(true);
+        const handleHidden = () => setIsMenuOpen(false);
+
+        el.addEventListener("shown.bs.collapse", handleShown);
+        el.addEventListener("hidden.bs.collapse", handleHidden);
+
+        return () => {
+            el.removeEventListener("shown.bs.collapse", handleShown);
+            el.removeEventListener("hidden.bs.collapse", handleHidden);
+        };
+    }, []);
 
     /**
      * Close the navbar ONLY when it's in "mobile collapsed" mode.
@@ -25,6 +42,16 @@ const Navbar: React.FC = () => {
         instance.hide();
     }, []);
 
+    const toggleMobileMenu = useCallback(() => {
+        const el = collapseRef.current;
+        if (!el) return;
+
+        const instance =
+            Collapse.getInstance(el) ?? new Collapse(el, { toggle: false });
+
+        instance.toggle();
+    }, []);
+
     return (
         <nav className="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
             <div className="container">
@@ -35,10 +62,9 @@ const Navbar: React.FC = () => {
                 <button
                     className="navbar-toggler"
                     type="button"
-                    data-bs-toggle="collapse"
-                    data-bs-target="#navbarNav"
+                    onClick={toggleMobileMenu}
                     aria-controls="navbarNav"
-                    aria-expanded="false"
+                    aria-expanded={isMenuOpen}
                     aria-label="Toggle navigation"
                 >
                     <span className="navbar-toggler-icon" />

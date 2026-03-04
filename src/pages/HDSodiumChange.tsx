@@ -65,14 +65,28 @@ const HemodialysisSodiumChangeCalculator: React.FC = () => {
 
             <h3 className="my-3">HD Sodium Change Calculator</h3>
 
-            <div className="row">
-                {/* Sticky Results Box */}
-                <div className="col-md-4 mb-2 py-3 sticky-results border-bottom border-secondary shadow-sm">
+            <div className="card mb-2 sticky-results border-secondary shadow-sm d-md-none">
+                <div className="card-body py-2">
                     <p className="my-1">Pre-HD Na: {serumNa} mEq/L</p>
                     <p className="my-1">Post-HD Na: {predictedPostNa} mEq/L</p>
                     <p className="my-1">
                         <strong>Expected ΔNa: {predictedDeltaNa} mEq/L</strong>
                     </p>
+                </div>
+            </div>
+
+            <div className="row">
+                {/* Sticky Results Box */}
+                <div className="col-md-4 mb-2 d-none d-md-block">
+                    <div className="card sticky-results border-secondary shadow-sm">
+                        <div className="card-body py-2">
+                            <p className="my-1">Pre-HD Na: {serumNa} mEq/L</p>
+                            <p className="my-1">Post-HD Na: {predictedPostNa} mEq/L</p>
+                            <p className="my-1">
+                                <strong>Expected ΔNa: {predictedDeltaNa} mEq/L</strong>
+                            </p>
+                        </div>
+                    </div>
                 </div>
 
                 {/* Inputs */}
@@ -431,3 +445,4 @@ const HemodialysisSodiumChangeCalculator: React.FC = () => {
 };
 
 export default HemodialysisSodiumChangeCalculator;
+

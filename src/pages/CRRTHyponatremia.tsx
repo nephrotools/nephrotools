@@ -118,11 +118,22 @@ const HyponatremiaCalculator: React.FC = () => {
                 <title>CRRT Hyponatremia - {Config.Title}</title>
             </Helmet>
             <h3 className="my-3">CRRT Hyponatremia Calculator</h3>
-            <div className="row">
-                <div className="col-md-4 mb-2 py-3 sticky-results border-bottom border-secondary shadow-sm">
+            <div className="card mb-2 sticky-results border-secondary shadow-sm d-md-none">
+                <div className="card-body py-2">
                     <p className="my-1">Total Rate: {totalRate} L/hr</p>
                     <p className="my-1">Diluting Solution Na: {dilutingSolutionNa === "custom" ? `${customDilutingSolutionNa}` : dilutingSolutionNa} meq/L</p>
                     <p className="my-1"><strong>Diluting Solution Rate: {dilutingSolutionRate} L/hr</strong></p>
+                </div>
+            </div>
+            <div className="row">
+                <div className="col-md-4 mb-2 d-none d-md-block">
+                    <div className="card sticky-results border-secondary shadow-sm">
+                        <div className="card-body py-2">
+                            <p className="my-1">Total Rate: {totalRate} L/hr</p>
+                            <p className="my-1">Diluting Solution Na: {dilutingSolutionNa === "custom" ? `${customDilutingSolutionNa}` : dilutingSolutionNa} meq/L</p>
+                            <p className="my-1"><strong>Diluting Solution Rate: {dilutingSolutionRate} L/hr</strong></p>
+                        </div>
+                    </div>
                 </div>
                 <div className="col-md-8">
                     <div className="mb-3">
