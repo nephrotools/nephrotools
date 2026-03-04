@@ -232,7 +232,7 @@ const SodiumChangeCalculator: React.FC = () => {
                             min={20}
                             max={60}
                             step={0.1}
-                            value={tbw}
+                            value={Math.min(60, Math.max(20, tbw))}
                             onChange={(e) => {
                                 const value = parseFloat(e.target.value);
                                 setTbw(Number.isNaN(value) ? 20 : value);
@@ -243,8 +243,6 @@ const SodiumChangeCalculator: React.FC = () => {
                                 id="tbw"
                                 type="number"
                                 className="form-control text-center"
-                                min={20}
-                                max={60}
                                 step={0.1}
                                 value={tbw}
                                 onFocus={handleFocus}
@@ -254,7 +252,7 @@ const SodiumChangeCalculator: React.FC = () => {
                                         setTbw(20);
                                         return;
                                     }
-                                    setTbw(Math.min(60, Math.max(20, value)));
+                                    setTbw(value);
                                 }}
                             />
                             <span className="input-group-text">L</span>
@@ -274,7 +272,7 @@ const SodiumChangeCalculator: React.FC = () => {
                             min={115}
                             max={135}
                             step={1}
-                            value={naInitial}
+                            value={Math.min(135, Math.max(115, naInitial))}
                             onChange={(e) => {
                                 const value = parseInt(e.target.value, 10);
                                 setNaInitial(Number.isNaN(value) ? 115 : value);
@@ -285,8 +283,6 @@ const SodiumChangeCalculator: React.FC = () => {
                                 id="naInitial"
                                 type="number"
                                 className="form-control text-center"
-                                min={115}
-                                max={135}
                                 step={1}
                                 value={naInitial}
                                 onFocus={handleFocus}
@@ -296,7 +292,7 @@ const SodiumChangeCalculator: React.FC = () => {
                                         setNaInitial(115);
                                         return;
                                     }
-                                    setNaInitial(Math.min(135, Math.max(115, value)));
+                                    setNaInitial(value);
                                 }}
                             />
                             <span className="input-group-text">meq/L</span>
@@ -412,7 +408,7 @@ const SodiumChangeCalculator: React.FC = () => {
                                                 min={0}
                                                 max={2000}
                                                 step={100}
-                                                value={card.volume}
+                                                value={Math.min(2000, Math.max(0, card.volume))}
                                                 onChange={(e) =>
                                                     updateCard(
                                                         setInputCards,
@@ -426,8 +422,6 @@ const SodiumChangeCalculator: React.FC = () => {
                                                 <input
                                                     type="number"
                                                     className="form-control text-center"
-                                                    min={0}
-                                                    max={2000}
                                                     step={100}
                                                     value={card.volume}
                                                     onFocus={handleFocus}
@@ -436,7 +430,7 @@ const SodiumChangeCalculator: React.FC = () => {
                                                             setInputCards,
                                                             card.id,
                                                             "volume",
-                                                            Math.min(2000, Math.max(0, parseInt(e.target.value, 10) || 0))
+                                                            parseInt(e.target.value, 10) || 0
                                                         )
                                                     }
                                                 />
@@ -554,7 +548,7 @@ const SodiumChangeCalculator: React.FC = () => {
                                                 min={0}
                                                 max={2000}
                                                 step={100}
-                                                value={card.volume}
+                                                value={Math.min(2000, Math.max(0, card.volume))}
                                                 onChange={(e) =>
                                                     updateCard(
                                                         setOutputCards,
@@ -568,8 +562,6 @@ const SodiumChangeCalculator: React.FC = () => {
                                                 <input
                                                     type="number"
                                                     className="form-control text-center"
-                                                    min={0}
-                                                    max={2000}
                                                     step={100}
                                                     value={card.volume}
                                                     onFocus={handleFocus}
@@ -578,7 +570,7 @@ const SodiumChangeCalculator: React.FC = () => {
                                                             setOutputCards,
                                                             card.id,
                                                             "volume",
-                                                            Math.min(2000, Math.max(0, parseInt(e.target.value, 10) || 0))
+                                                            parseInt(e.target.value, 10) || 0
                                                         )
                                                     }
                                                 />
