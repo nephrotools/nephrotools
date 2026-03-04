@@ -4,6 +4,7 @@ import CRRTFluidPlanning from "./pages/CRRTFluidPlanning";
 import CRRTHyponatremia from "./pages/CRRTHyponatremia";
 import ElectrolyteFreeWater from "./pages/ElectrolyteFreeWater";
 import HDHyponatremia from "./pages/HDSodiumChange";
+import SodiumChangeCalculator from "./pages/SodiumChangeCalculator";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import NotFoundPage from "./pages/NotFoundPage"; // Import the NotFoundPage component
@@ -26,6 +27,7 @@ const App = () => {
                 <Route path="/crrt-fluid-planning" element={<CRRTFluidPlanning />} />
                 <Route path="/crrt-hyponatremia" element={<CRRTHyponatremia />} />
                 <Route path="/hd-sodiumchange" element={<HDHyponatremia />} />
+                <Route path="/sodium-change-calculator" element={<SodiumChangeCalculator />} />
                 <Route path="/electrolyte-free-water" element={<ElectrolyteFreeWater />} />
                 <Route path="*" element={<NotFoundPage />} />
             </Routes>

@@ -123,6 +123,15 @@ const Navbar: React.FC = () => {
                             <ul className="dropdown-menu" aria-labelledby="sodiumDropdown">
                                 <li>
                                     <Link
+                                        to="/sodium-change-calculator"
+                                        className="dropdown-item"
+                                        onClick={closeMobileMenu}
+                                    >
+                                        Sodium Change Calculator
+                                    </Link>
+                                </li>
+                                <li>
+                                    <Link
                                         to="/electrolyte-free-water"
                                         className="dropdown-item"
                                         onClick={closeMobileMenu}

@@ -29,6 +29,9 @@ const HomePage: React.FC = () => {
 
             <div className="list-group mt-4">
                 <p className="list-group-item active mb-0 bg-success">Sodium</p>
+                <Link to="/sodium-change-calculator" className="list-group-item list-group-item-action">
+                    Sodium Change Calculator
+                </Link>
                 <Link to="/electrolyte-free-water" className="list-group-item list-group-item-action">
                     Electrolyte Free Water Clearance
                 </Link>

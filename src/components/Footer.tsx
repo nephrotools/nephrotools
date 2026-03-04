@@ -19,7 +19,7 @@ const Footer: React.FC = () => {
                     </a>
                 </p>
                 <p className="mb-2 fs-6">
-                    Last Updated: <strong>11/30/2025</strong>
+                    Last Updated: <strong>03/03/2026</strong>
                 </p>
                 <p className="text-muted small">
                     <strong>Disclaimer:</strong> This tool is designed for educational purposes only and
