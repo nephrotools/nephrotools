@@ -10,7 +10,7 @@
     "lint": "eslint .",
     "preview": "vite preview",
     "predeploy": "npm run build",
-    "deploy": "gh-pages -d dist"
+    "deploy": "gh-pages -r https://github.com/nephrotools/nephrotools.github.io.git -d dist"
   },
   "dependencies": {
     "@types/bootstrap": "^5.2.10",
