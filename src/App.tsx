@@ -21,17 +21,21 @@ const App = () => {
 
     return (
         <HashRouter>
-            <Navbar />
-            <Routes>
-                <Route path="/" element={<HomePage />} />
-                <Route path="/crrt-fluid-planning" element={<CRRTFluidPlanning />} />
-                <Route path="/crrt-hyponatremia" element={<CRRTHyponatremia />} />
-                <Route path="/hd-sodiumchange" element={<HDHyponatremia />} />
-                <Route path="/sodium-change-calculator" element={<SodiumChangeCalculator />} />
-                <Route path="/electrolyte-free-water" element={<ElectrolyteFreeWater />} />
-                <Route path="*" element={<NotFoundPage />} />
-            </Routes>
-            <Footer />
+            <div className="app-shell">
+                <Navbar />
+                <main className="app-main">
+                    <Routes>
+                        <Route path="/" element={<HomePage />} />
+                        <Route path="/crrt-fluid-planning" element={<CRRTFluidPlanning />} />
+                        <Route path="/crrt-hyponatremia" element={<CRRTHyponatremia />} />
+                        <Route path="/hd-sodiumchange" element={<HDHyponatremia />} />
+                        <Route path="/sodium-change-calculator" element={<SodiumChangeCalculator />} />
+                        <Route path="/electrolyte-free-water" element={<ElectrolyteFreeWater />} />
+                        <Route path="*" element={<NotFoundPage />} />
+                    </Routes>
+                </main>
+                <Footer />
+            </div>
         </HashRouter>
     );
 };

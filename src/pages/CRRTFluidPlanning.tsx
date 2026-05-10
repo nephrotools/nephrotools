@@ -110,13 +110,13 @@ const CRRTFluidPlanning: React.FC = () => {
     const { totalRate, finalConcentrations } = calculateResults();
 
     return (
-        <div className="container my-2">
+        <div className="container calculator-page my-2">
             <Helmet>
                 <title>CRRT Fluid Planning - {Config.Title}</title>
             </Helmet>
 
             <h3 className="my-3">CRRT Fluid Planning</h3>
-            <div className="card mb-2 sticky-results border-secondary shadow-sm d-md-none">
+            <div className="card mb-2 sticky-results border-secondary shadow-sm d-md-none" aria-live="polite">
                 <div className="card-body py-2">
                     <p className="my-0"><strong>Total Rate:</strong> {totalRate} L/hr</p>
                     <p className="my-0"><strong>Final Concentrations:</strong></p>
@@ -139,7 +139,7 @@ const CRRTFluidPlanning: React.FC = () => {
             </div>
             <div className="row">
                 <div className="col-md-4 mb-2 d-none d-md-block">
-                    <div className="card sticky-results border-secondary shadow-sm">
+                    <div className="card sticky-results border-secondary shadow-sm" aria-live="polite">
                         <div className="card-body py-2">
                             <p className="my-0"><strong>Total Rate:</strong> {totalRate} L/hr</p>
                             <p className="my-0"><strong>Final Concentrations:</strong></p>

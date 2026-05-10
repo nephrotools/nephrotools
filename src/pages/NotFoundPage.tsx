@@ -11,7 +11,7 @@ const NotFoundPage: React.FC = () => {
     };
 
     return (
-        <div className="container mt-5 text-center">
+        <div className="container compact-calculator mt-5 text-center">
             <Helmet>
                 <title>Home - {Config.Title}</title>
             </Helmet>

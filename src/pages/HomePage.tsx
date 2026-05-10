@@ -5,36 +5,52 @@ import { Config } from '../AppConfig';
 
 const HomePage: React.FC = () => {
     return (
-        <div className="container my-2">
+        <div className="container home-page my-2">
             <Helmet>
                 <title>{Config.Title}</title>
             </Helmet>
 
-            <div className="list-group mt-4">
-                <p className="list-group-item active mb-0">CRRT</p>
-                <Link to="/crrt-fluid-planning" className="list-group-item list-group-item-action">
-                    CRRT Fluid Planning
-                </Link>
-                <Link to="/crrt-hyponatremia" className="list-group-item list-group-item-action">
-                    CRRT Hyponatremia
-                </Link>
-            </div>
+            <h1 className="home-title">NephroTools</h1>
 
-            <div className="list-group mt-4">
-                <p className="list-group-item active mb-0 bg-danger">HD</p>
-                <Link to="/hd-sodiumchange" className="list-group-item list-group-item-action">
-                    HD Expected ΔNa
-                </Link>
-            </div>
+            <div className="home-grid">
+                <section className="tool-group" aria-labelledby="crrt-tools">
+                    <div className="tool-group-header">
+                        <h2 id="crrt-tools">CRRT</h2>
+                    </div>
+                    <div className="list-group list-group-flush">
+                        <Link to="/crrt-fluid-planning" className="list-group-item list-group-item-action">
+                            CRRT Fluid Planning
+                        </Link>
+                        <Link to="/crrt-hyponatremia" className="list-group-item list-group-item-action">
+                            CRRT Hyponatremia
+                        </Link>
+                    </div>
+                </section>
 
-            <div className="list-group mt-4">
-                <p className="list-group-item active mb-0 bg-success">Sodium</p>
-                <Link to="/sodium-change-calculator" className="list-group-item list-group-item-action">
-                    Sodium Change Calculator
-                </Link>
-                <Link to="/electrolyte-free-water" className="list-group-item list-group-item-action">
-                    Electrolyte Free Water Clearance
-                </Link>
+                <section className="tool-group" aria-labelledby="hd-tools">
+                    <div className="tool-group-header">
+                        <h2 id="hd-tools">HD</h2>
+                    </div>
+                    <div className="list-group list-group-flush">
+                        <Link to="/hd-sodiumchange" className="list-group-item list-group-item-action">
+                            HD Expected &Delta;Na
+                        </Link>
+                    </div>
+                </section>
+
+                <section className="tool-group" aria-labelledby="sodium-tools">
+                    <div className="tool-group-header">
+                        <h2 id="sodium-tools">Sodium</h2>
+                    </div>
+                    <div className="list-group list-group-flush">
+                        <Link to="/sodium-change-calculator" className="list-group-item list-group-item-action">
+                            Sodium Change Calculator
+                        </Link>
+                        <Link to="/electrolyte-free-water" className="list-group-item list-group-item-action">
+                            Electrolyte Free Water Clearance
+                        </Link>
+                    </div>
+                </section>
             </div>
         </div>
     );

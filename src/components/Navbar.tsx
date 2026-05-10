@@ -53,7 +53,7 @@ const Navbar: React.FC = () => {
     }, []);
 
     return (
-        <nav className="navbar navbar-expand-md navbar-dark bg-dark sticky-top">
+        <nav className="navbar navbar-expand-md navbar-dark app-navbar sticky-top">
             <div className="container">
                 <Link to="/" className="navbar-brand" onClick={closeMobileMenu}>
                     NephroTools
@@ -127,7 +127,7 @@ const Navbar: React.FC = () => {
                                         className="dropdown-item"
                                         onClick={closeMobileMenu}
                                     >
-                                        HD Expected ΔNa
+                                        HD Expected &Delta;Na
                                     </Link>
                                 </li>
                             </ul>

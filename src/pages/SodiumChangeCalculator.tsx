@@ -182,19 +182,19 @@ const SodiumChangeCalculator: React.FC = () => {
         Number.isFinite(value) ? value.toFixed(1) : "N/A";
 
     return (
-        <div className="container my-2">
+        <div className="container calculator-page my-2">
             <Helmet>
                 <title>Sodium Change Calculator - {Config.Title}</title>
             </Helmet>
 
             <h3 className="my-3">Sodium Change Calculator</h3>
-            <div className="card mb-3 sticky-results border-secondary shadow-sm">
+            <div className="card mb-3 sticky-results border-secondary shadow-sm" aria-live="polite">
                 <div className="card-body">
                     <p className="mb-1">
                         <strong>Final Sodium:</strong> {formatResult(results.naFinal)} meq/L
                     </p>
                     <p className="mb-0">
-                        <strong>ΔNa:</strong> {formatResult(results.naChange)} meq/L
+                        <strong>&Delta;Na:</strong> {formatResult(results.naChange)} meq/L
                     </p>
                 </div>
             </div>
@@ -646,11 +646,11 @@ const SodiumChangeCalculator: React.FC = () => {
                                 <br />
                                 E<sub>MB</sub> = E<sub>input</sub> - E<sub>output</sub>
                                 <br />
-                                E<sub>input</sub> = Σ[(Na + K) × input volume (L)]
+                                E<sub>input</sub> = &Sigma;[(Na + K) &times; input volume (L)]
                                 <br />
-                                E<sub>output</sub> = Σ[(Na + K) × output volume (L)]
+                                E<sub>output</sub> = &Sigma;[(Na + K) &times; output volume (L)]
                                 <br />
-                                V<sub>Δ</sub> = net volume change (L)
+                                V<sub>&Delta;</sub> = net volume change (L)
                                 <br />
                                 Na<sub>2</sub> = predicted final plasma sodium (meq/L)
                                 <br />

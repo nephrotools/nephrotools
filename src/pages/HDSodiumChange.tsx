@@ -24,7 +24,7 @@ const HemodialysisSodiumChangeCalculator: React.FC = () => {
         const Qb = bloodFlowRate; // mL/min
         const t = duration; // min
         const Na_d = dialysateNa; // mEq/L
-        const D5W_L = d5wVolumeMl / 1000; // convert mL → L
+        const D5W_L = d5wVolumeMl / 1000; // convert mL to L
 
         // 1. Baseline Na content (mEq)
         const baselineNaContent = Na_s * TBW;
@@ -45,7 +45,7 @@ const HemodialysisSodiumChangeCalculator: React.FC = () => {
             return;
         }
 
-        // Post-HD Na and ΔNa
+        // Post-HD Na and delta Na
         const postHdNa = newNaContent / newWaterContent; // mEq/L
         const deltaNa = postHdNa - Na_s; // mEq/L
 
@@ -58,19 +58,19 @@ const HemodialysisSodiumChangeCalculator: React.FC = () => {
     }, [calculateResults]);
 
     return (
-        <div className="container mt-2">
+        <div className="container calculator-page mt-2">
             <Helmet>
                 <title>HD Hyponatremia Calculator - {Config.Title}</title>
             </Helmet>
 
             <h3 className="my-3">HD Sodium Change Calculator</h3>
 
-            <div className="card mb-2 sticky-results border-secondary shadow-sm d-md-none">
+            <div className="card mb-2 sticky-results border-secondary shadow-sm d-md-none" aria-live="polite">
                 <div className="card-body py-2">
                     <p className="my-1">Pre-HD Na: {serumNa} mEq/L</p>
                     <p className="my-1">Post-HD Na: {predictedPostNa} mEq/L</p>
                     <p className="my-1">
-                        <strong>Expected ΔNa: {predictedDeltaNa} mEq/L</strong>
+                        <strong>Expected &Delta;Na: {predictedDeltaNa} mEq/L</strong>
                     </p>
                 </div>
             </div>
@@ -78,12 +78,12 @@ const HemodialysisSodiumChangeCalculator: React.FC = () => {
             <div className="row">
                 {/* Sticky Results Box */}
                 <div className="col-md-4 mb-2 d-none d-md-block">
-                    <div className="card sticky-results border-secondary shadow-sm">
+                    <div className="card sticky-results border-secondary shadow-sm" aria-live="polite">
                         <div className="card-body py-2">
                             <p className="my-1">Pre-HD Na: {serumNa} mEq/L</p>
                             <p className="my-1">Post-HD Na: {predictedPostNa} mEq/L</p>
                             <p className="my-1">
-                                <strong>Expected ΔNa: {predictedDeltaNa} mEq/L</strong>
+                                <strong>Expected &Delta;Na: {predictedDeltaNa} mEq/L</strong>
                             </p>
                         </div>
                     </div>
@@ -410,13 +410,13 @@ const HemodialysisSodiumChangeCalculator: React.FC = () => {
                                 <br />
                                 [Na]<sub>d</sub> = dialysate sodium (mEq/L)
                                 <br />
-                                Q<sub>b</sub> = blood flow rate L/min (mL/min ÷ 1000)
+                                Q<sub>b</sub> = blood flow rate L/min (mL/min &divide; 1000)
                                 <br />
                                 t = dialysis duration (min)
                                 <br />
                                 TBW = total body water (L)
                                 <br />
-                                D5W = D5W volume in liters (D5W mL ÷ 1000)
+                                D5W = D5W volume in liters (D5W mL &divide; 1000)
                                 <br />
                             </p>
 

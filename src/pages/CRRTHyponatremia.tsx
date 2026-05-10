@@ -113,12 +113,12 @@ const HyponatremiaCalculator: React.FC = () => {
     }, []);
 
     return (
-        <div className="container mt-2">
+        <div className="container calculator-page mt-2">
             <Helmet>
                 <title>CRRT Hyponatremia - {Config.Title}</title>
             </Helmet>
             <h3 className="my-3">CRRT Hyponatremia Calculator</h3>
-            <div className="card mb-2 sticky-results border-secondary shadow-sm d-md-none">
+            <div className="card mb-2 sticky-results border-secondary shadow-sm d-md-none" aria-live="polite">
                 <div className="card-body py-2">
                     <p className="my-1">Total Rate: {totalRate} L/hr</p>
                     <p className="my-1">Diluting Solution Na: {dilutingSolutionNa === "custom" ? `${customDilutingSolutionNa}` : dilutingSolutionNa} meq/L</p>
@@ -127,7 +127,7 @@ const HyponatremiaCalculator: React.FC = () => {
             </div>
             <div className="row">
                 <div className="col-md-4 mb-2 d-none d-md-block">
-                    <div className="card sticky-results border-secondary shadow-sm">
+                    <div className="card sticky-results border-secondary shadow-sm" aria-live="polite">
                         <div className="card-body py-2">
                             <p className="my-1">Total Rate: {totalRate} L/hr</p>
                             <p className="my-1">Diluting Solution Na: {dilutingSolutionNa === "custom" ? `${customDilutingSolutionNa}` : dilutingSolutionNa} meq/L</p>
