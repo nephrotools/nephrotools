@@ -452,3 +452,15 @@ label {
         row-gap: 0.25rem;
     }
 }
+
+@media (max-width: 767.98px) {
+    .hd-sodium-page .d-flex.align-items-center:has(> .form-range) {
+        padding-right: 0.85rem;
+        padding-left: 0.85rem;
+    }
+
+    .hd-sodium-page .d-flex.align-items-center:has(> .form-range) > .form-range {
+        padding-right: 0.5rem !important;
+        padding-left: 0.5rem !important;
+    }
+}

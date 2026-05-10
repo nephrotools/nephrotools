@@ -58,7 +58,7 @@ const HemodialysisSodiumChangeCalculator: React.FC = () => {
     }, [calculateResults]);
 
     return (
-        <div className="container calculator-page mt-2">
+        <div className="container calculator-page hd-sodium-page mt-2">
             <Helmet>
                 <title>HD Hyponatremia Calculator - {Config.Title}</title>
             </Helmet>
