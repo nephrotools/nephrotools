@@ -45,8 +45,12 @@ const HemodialysisSodiumChangeCalculator: React.FC = () => {
             return;
         }
 
-        // Post-HD Na and delta Na
-        const postHdNa = newNaContent / newWaterContent; // mEq/L
+        // Post-HD Na cannot overshoot the dialysate sodium in the direction of correction.
+        const modeledPostHdNa = newNaContent / newWaterContent; // mEq/L
+        const postHdNa =
+            Na_d >= Na_s
+                ? Math.min(modeledPostHdNa, Na_d)
+                : Math.max(modeledPostHdNa, Na_d);
         const deltaNa = postHdNa - Na_s; // mEq/L
 
         setPredictedPostNa(postHdNa.toFixed(1));
@@ -426,6 +430,9 @@ const HemodialysisSodiumChangeCalculator: React.FC = () => {
                                 than the plasma flow rate to provide an additional margin of
                                 safety against overcorrection. It is acknowledged, however, that
                                 the plasma flow rate would offer greater physiological accuracy.
+                                The predicted post-HD sodium is capped at the dialysate sodium to
+                                avoid modeling correction beyond the dialysate-serum sodium
+                                gradient.
                             </p>
                         </div>
                         <div className="modal-footer">
